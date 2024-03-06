@@ -1,14 +1,14 @@
 #pragma once
 #include "Mesh.h"
-#include "GeneralData.h"
+#include "../GeneralData.h"
 #include <iostream>
+#include <math.h>
 
 
-using namespace std;
 
 void GenerateMesh(Mesh & mesh)
 {
-	// Генерируем по оси X.
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ X.
 	for (int i(0); i < nodes_x.size() - 1; i++)
 	{
 		double x0(nodes_x[i]);
@@ -29,7 +29,7 @@ void GenerateMesh(Mesh & mesh)
 	mesh.nodes_x.push_back(nodes_x.back());
 
 
-	// Генерируем по оси Y.
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ Y.
 	for (int i(0); i < nodes_y.size() - 1; i++)
 	{
 		double y0(nodes_y[i]);
@@ -57,12 +57,17 @@ void generateArrayOfPoints(Mesh& mesh)
 	for (auto& y : mesh.nodes_y)
 		for (auto& x : mesh.nodes_x)
 			mesh.points.push_back(pair<double, double>{ x, y });
+	cout << "Array of points created" << endl;
 }
 
 void generateArrayOfElems(Mesh& mesh)
 {
 	for (int i(0); i < mesh.nodes_y.size() - 1; i++)
 		for (int j(0); j < mesh.nodes_x.size() - 1; j++)
-			mesh.elems.push_back(Elem(j * nodes_x.size() + i, (j * i) + 1, (j + 1) * i, (j + 1) * i + 1));
+			mesh.elems.push_back(Elem(i * mesh.nodes_x.size() + j,
+									 (i * mesh.nodes_x.size() + j) + 1, 
+									 (i + 1) * mesh.nodes_x.size() + j, 
+									 (i + 1) * mesh.nodes_x.size() + j + 1));
+	cout << "Array of elems created" << endl;
 }
 

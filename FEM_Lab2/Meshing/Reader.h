@@ -2,7 +2,7 @@
 #include<string>
 #include<vector>
 #include<fstream>
-#include "GeneralData.h"
+#include "../GeneralData.h"
 
 using namespace std;
 
@@ -11,7 +11,7 @@ void ReadData(string file)
 	ifstream fin(file);
 	fin >> elems_amount;
 
-	// Считываем границы элементов, мю, плотность тока и номер области.
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	list_of_elems.resize(elems_amount);
 	list_of_mu0.resize(elems_amount);
 	list_of_J.resize(elems_amount);
@@ -23,7 +23,7 @@ void ReadData(string file)
 		fin >> list_of_elems[i][0] >> list_of_elems[i][1] >> list_of_elems[i][2] >> list_of_elems[i][3] >> list_of_mu0[i] >> list_of_J[i] >> material_number[i];
 	}
 
-	// Считываем разбиение по оси x.
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ x.
 	double x0;
 	fin >> x0 >> nodes_x_amount;
 	nodes_x_amount++;
@@ -42,7 +42,7 @@ void ReadData(string file)
 		fin >> direction_x[i];
 
 
-	// Считываем разбиение по оси x.
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ x.
 	double y0;
 	fin >> y0 >> nodes_y_amount;
 	nodes_y_amount++;
