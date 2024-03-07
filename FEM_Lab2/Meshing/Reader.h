@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void ReadData(string file)
+void read_data(string file)
 {
 	ifstream fin(file);
 	fin >> elems_amount;

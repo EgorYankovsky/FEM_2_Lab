@@ -6,7 +6,7 @@
 
 
 
-void GenerateMesh(Mesh & mesh)
+void generate_mesh(Mesh & mesh)
 {
 	// ���������� �� ��� X.
 	for (int i(0); i < nodes_x.size() - 1; i++)
@@ -88,7 +88,7 @@ void GenerateMesh(Mesh & mesh)
 	cout << "Mesh generated" << endl;
 }
 
-void generateArrayOfPoints(Mesh& mesh)
+void generate_array_of_points(Mesh& mesh)
 {
 	for (auto& y : mesh.nodes_y)
 		for (auto& x : mesh.nodes_x)
@@ -96,14 +96,18 @@ void generateArrayOfPoints(Mesh& mesh)
 	cout << "Array of points created" << endl;
 }
 
-void generateArrayOfElems(Mesh& mesh)
+void generate_array_of_elems(Mesh& mesh)
 {
 	for (int i(0); i < mesh.nodes_y.size() - 1; i++)
 		for (int j(0); j < mesh.nodes_x.size() - 1; j++)
-			mesh.elems.push_back(Elem(i * mesh.nodes_x.size() + j,
-									 (i * mesh.nodes_x.size() + j) + 1, 
-									 (i + 1) * mesh.nodes_x.size() + j, 
-									 (i + 1) * mesh.nodes_x.size() + j + 1));
+		{
+			std::vector<int> elem;
+			elem.push_back(i * mesh.nodes_x.size() + j);
+			elem.push_back(i * mesh.nodes_x.size() + j + 1);
+			elem.push_back((i + 1) * mesh.nodes_x.size() + j);
+			elem.push_back((i + 1) * mesh.nodes_x.size() + j + 1);
+			mesh.elems.push_back(elem);
+		}
 	cout << "Array of elems created" << endl;
 }
 

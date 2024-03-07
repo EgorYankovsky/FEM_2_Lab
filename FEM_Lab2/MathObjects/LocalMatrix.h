@@ -1,8 +1,6 @@
 #pragma once
 #include <iostream>
 
-using std::cerr;
-
 class LocalMatrix
 {
 private:
@@ -38,7 +36,7 @@ public:
     {
         if (i > 3 || j > 3)
         {
-            cerr << "Out of local matrix range";
+            std::cerr << "Out of local matrix range";
             exit(-1);
         }
         return 1.0 / _mu * ((1.0 / _hx) * _G[i % 2][j % 2] * (_hy / 6.0) * _M[i / 2][j / 2] + (_hx / 6.0) * _M[i % 2][j % 2] * (1.0 / _hy) * _G[i / 2][j / 2]);    
