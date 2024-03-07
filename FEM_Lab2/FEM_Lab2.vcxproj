@@ -128,16 +128,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FEM_Lab2.cpp" />
-    <ClCompile Include="Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="InputMeshData.txt" />
+    <Text Include="Subtotals\Elems.txt" />
+    <Text Include="Subtotals\Points.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneralData.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MeshGenerator.h" />
-    <ClInclude Include="Reader.h" />
+    <ClInclude Include="MathObjects\GlobalMatrix.h" />
+    <ClInclude Include="MathObjects\GlobalVector.h" />
+    <ClInclude Include="MathObjects\LocalMatrix.h" />
+    <ClInclude Include="MathObjects\LocalVector.h" />
+    <ClInclude Include="Meshing\Mesh.h" />
+    <ClInclude Include="Meshing\MeshGenerator.h" />
+    <ClInclude Include="Meshing\Reader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

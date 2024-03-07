@@ -17,13 +17,31 @@ void GenerateMesh(Mesh & mesh)
 		mesh.nodes_x.push_back(x0);
 		double h0(step0_x[i]);
 		int direct = direction_x[i];
-
-		double x_curr = x0 + h0 * pow(coef_x[i], 1);
-		int j(0);
+		if (direction_x[i] == -1)
+		{
+			double x_curr = x0 + h0;
+			int j(1);
+			while (x_curr < x1)
+			{
+				x_curr += h0 * pow(coef_x[i], j);
+				j++;
+			}
+			h0 *= pow(coef_x[i], --j);
+		}
+		double x_curr = x0 + h0;
+		int j(1);
 		while (x_curr < x1)
 		{
 			mesh.nodes_x.push_back(x_curr);
-			x_curr += h0 * pow(coef_x[i], 1);
+			if (direction_x[i] == -1)
+			{
+				h0 /= coef_x[i];
+				x_curr += h0;
+
+			}
+			else
+				x_curr += h0 * pow(coef_x[i], j);
+			j++;
 		}
 	}
 	mesh.nodes_x.push_back(nodes_x.back());
@@ -37,14 +55,32 @@ void GenerateMesh(Mesh & mesh)
 
 		mesh.nodes_y.push_back(y0);
 		double h0(step0_y[i]);
+		if (direction_y[i] == -1)
+		{
+			double y_curr = y0 + h0;
+			int j(1);
+			while (y_curr < y1)
+			{
+				y_curr += h0 * pow(coef_y[i], j);
+				j++;
+			}
+			h0 *= pow(coef_y[i], --j);
+		}
 		int direct = direction_y[i];
 
-		double y_curr = y0 + h0 * pow(coef_y[i], 1);
-		int j(0);
+		double y_curr = y0 + h0;
+		int j(1);
 		while (y_curr < y1)
 		{
-			y_curr += h0 * pow(coef_y[i], 1.0);
 			mesh.nodes_y.push_back(y_curr);
+			if (direction_y[i] == -1)
+			{
+				h0 /= coef_y[i];
+				y_curr += h0;
+
+			}
+			else
+				y_curr += h0 * pow(coef_y[i], j);
 			j++;
 		}
 	}
