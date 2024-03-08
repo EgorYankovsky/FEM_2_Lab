@@ -1,6 +1,10 @@
 #pragma once
 
-#include<vector>
+#include <vector>
+#include "./MathObjects/GlobalMatrix.h"
+#include "./MathObjects/GlobalVector.h"
+#include "./Meshing/Mesh.h"
+
 using namespace std;
 
 int elems_amount;
@@ -23,3 +27,24 @@ vector<double> coef_y;
 vector<int> direction_y;
 
 pair<int, int> scale;
+
+void consider_boundary_conditions(GlobalMatrix & gm, GlobalVector & gv, int points_amount)
+{
+    int divider_x = nodes_x.size();
+    int step_x = nodes_x.size();
+    // По оси X.
+    for (int i = 0; i < points_amount; i += step_x)
+    {
+        gv.set_value(i, 0.0);
+        gv.set_value(i + step_x - 1, 0.0);
+        gm.consider_boundary_condition_at(i);
+        gm.consider_boundary_condition_at(i + step_x - 1);
+    }
+
+    // По оси Y.
+    for (int i = nodes_x.size() * (nodes_y.size() - 1) + 1; i < points_amount; i++)
+    {
+        gv.set_value(i, 0.0);
+        gm.consider_boundary_condition_at(i);
+    }
+}

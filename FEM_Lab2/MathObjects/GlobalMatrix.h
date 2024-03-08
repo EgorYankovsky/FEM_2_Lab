@@ -31,9 +31,48 @@ private:
         return true;
     }
 
+    double get_value_al(int i, int j)
+    {
+        for (int ii = 0; ii < _ig[i + 1] - _ig[i]; ii++)
+            if (_jg[_ig[i] + ii] == j)
+                return _al[_ig[i] + ii];
+        return 0.0;  
+    }
+
+    double get_value_au(int i, int j)
+    {
+        for (int ii = 0; ii < _ig[i + 1] - _ig[i]; ii++)
+            if (_jg[_ig[i] + ii] == j)
+                return _au[_ig[i] + ii];
+        return 0.0;  
+    }
+
 public:
 
-    double get_value(int i, int j);
+    void consider_boundary_condition_at(int index)
+    {
+        _diag[index] = 1.0;   
+        for (int j = _ig[index]; j < _ig[index + 1]; j++)
+            _al[j] = 0;
+        for (int j = 0; j < _jg.size(); j++)
+            if (_jg[j] == index)
+                _au[j] = 0;
+    }
+
+    double get_value(int i, int j)
+    {
+        if (i > size() || j > size())
+        {
+            std::cerr << "Index out of matrix" << std::endl;
+            exit(-1);
+        }
+        if (i - j == 0)
+            return _diag[i];
+        else if (i - j < 0)
+            return get_value_au(j, i);
+        else if (i - j > 0)
+            return get_value_al(i, j);
+    }
 
     inline int size() { return _diag.size(); }
 
@@ -73,6 +112,8 @@ public:
             for (int j(0); j < arr[i].size(); j++)
                 _jg.push_back(arr[i][j]);
         }
+        _al.resize(_jg.size());
+        _au.resize(_jg.size());
     }
 
     void add(LocalMatrix lm, vector<int> elem)
@@ -89,7 +130,6 @@ public:
                 {
                     val = lm.get_value(ii, jj);
                     _diag[i] += lm.get_value(ii, jj);
-                    break;
                 }
                 else if (i < j)
                 {
@@ -98,7 +138,6 @@ public:
                         if (_jg[ind] == i) break;
                     val = lm.get_value(ii, jj);
                     _au[ind] += lm.get_value(ii, jj);
-                    break;
                 }
                 else if (i > j)
                 {
@@ -107,7 +146,6 @@ public:
                         if (_jg[ind] == j) break;
                     val = lm.get_value(ii, jj);
                     _al[ind] += lm.get_value(ii, jj);
-                    break;
                 }
                 jj++;
             }

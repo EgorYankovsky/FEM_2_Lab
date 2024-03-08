@@ -15,10 +15,14 @@ public:
 
     GlobalVector(/* args */);
 
+    inline void set_value(int index, double value) { _values[index] = value; }
+
     GlobalVector(int size)
     {
         _values.resize(size);
     }
+
+    inline double get_value(int index) { return _values[index]; }
 
     void add(LocalVector lv, std::vector<int> pointers)
     {
