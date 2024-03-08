@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneralData.h" />
+    <ClInclude Include="LU&amp;LOS.h" />
     <ClInclude Include="MathObjects\GlobalMatrix.h" />
     <ClInclude Include="MathObjects\GlobalVector.h" />
     <ClInclude Include="MathObjects\LocalMatrix.h" />

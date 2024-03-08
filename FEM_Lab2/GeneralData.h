@@ -26,6 +26,8 @@ vector<double> step0_y;
 vector<double> coef_y;
 vector<int> direction_y;
 
+int nodes_x_y_amount = nodes_x_amount * nodes_y_amount;
+
 pair<int, int> scale;
 
 void consider_boundary_conditions(GlobalMatrix & gm, GlobalVector & gv, int points_amount)

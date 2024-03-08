@@ -7,9 +7,11 @@ class  GlobalVector
 {
 private:
 
-    std::vector<double> _values;
+    //std::vector<double> _values;
 
 public:
+
+    vector<double> _values;
 
     inline int size() { return _values.size(); }
 
@@ -24,7 +26,14 @@ public:
 
     inline double get_value(int index) { return _values[index]; }
 
-    void add(LocalVector lv, std::vector<int> pointers)
+    inline void add_value(int index, double value) { _values[index] += value; }
+
+    inline void down_value(int index, double value) { _values[index] -= value; }
+
+    inline void reduce_value(int index, double value) { _values[index] /= value; }
+
+
+    void add(LocalVector lv, vector<int> pointers)
     {
         for (int i(0); i < 4; i++)
             _values[pointers[i]] += lv[i];
