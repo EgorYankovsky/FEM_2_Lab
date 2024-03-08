@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void LU(GlobalMatrix gm, GlobalVector gv)
+void LU(GlobalMatrix gm)
 {
     gm.d.resize(gm.size());
     gm.gl.resize(gm.get_elems_amount());
@@ -52,9 +52,6 @@ void LU(GlobalMatrix gm, GlobalVector gv)
         }
         gm.d[i] = gm._diag[i] - sd;
     }
-
-    for (int i = 0; i < nodes_x_y_amount; i++)
-        gv.set_value(i, 0);
 }
 
 void mult_A(GlobalVector & vect, GlobalVector & res, GlobalMatrix gm)
@@ -136,6 +133,9 @@ void sum_vector(GlobalVector & a, GlobalVector & b, GlobalVector & res, int n)
 
 void LOS(GlobalMatrix gm, GlobalVector gv, GlobalVector gvr)
 {
+    for (auto & value : gv._values)
+        value = 0.0;
+        
     double eps = 1e-15;
     int max_iter = 10000;
     vector<double> L;

@@ -56,6 +56,11 @@ public:
 
     vector<double> _au;
 
+    GlobalMatrix()
+    {
+        std::cout << "empty matrix created" << std::endl;
+    }
+
     GlobalMatrix(vector<int>_ig, vector<int>_jg, vector<double> _diag, vector<double> _al, vector<double> _au) 
     {
         this->_ig = _ig;
